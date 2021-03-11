@@ -21,6 +21,17 @@ const Page = db.define("page", {
   },
 });
 
+// function generateSlug(title) {
+//   // Removes all non-alphanumeric characters from title
+//   // And make whitespace underscore
+//   return;
+// }
+Page.beforeValidate((page) => {
+  if (!page.slug) {
+    page.slug = page.title.replace(/\s+/g, "_").replace(/\W/g, "");
+  }
+});
+
 const User = db.define("user", {
   name: {
     type: Sequelize.STRING,
